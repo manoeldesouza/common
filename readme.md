@@ -24,6 +24,7 @@ NOTE: add_host may two logins
 
 How it looks like:
 
+    ./common run ls
     osmc@192.168.100.32:
     Movies
     Music
