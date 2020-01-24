@@ -49,7 +49,7 @@ run() {
     ssh $host "$@"
     echo " "
 
-  done < ~/.config/common.cfg
+  done
 
 }
 
