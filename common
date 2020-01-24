@@ -1,0 +1,80 @@
+#!/bin/sh
+
+
+init() {
+
+  ssh-keygen -t rsa
+  mkdir -p ~/.config
+  touch ~/.config/common.cfg
+
+}
+
+
+usage() {
+
+  echo " "
+  echo "common: Common command executer for multiple hosts"
+  echo " "
+  echo "Version: 1.0.0"
+  echo "Release: 24-Jan-2020"
+  echo " Author: Manoel de Souza <manoel.desouza@outlook.com.br>"
+  echo " "
+  echo "USAGE: "
+  echo "  common init"
+  echo "  common add_host <user>@<host>"
+  echo "  common run <unix command>"
+  echo " "
+  echo "NOTE: add_host will require login twice "
+  echo " "
+
+} 
+
+
+add_host() {
+
+  host=$1
+  
+  ssh $host mkdir -p '~/.ssh'
+  cat ~/.ssh/id_rsa.pub | ssh $host 'cat >> ~/.ssh/authorized_keys'
+  echo $host >> ~/.config/common.cfg
+
+}
+
+
+run() {
+
+  for host in `cat ~/.config/common.cfg`
+  do
+    echo "\e[1m\e[4m$host:\e[0m"
+    ssh $host $1 $2 $3 $4 $5 $6 $7 $8 $9 $10
+    echo " "
+
+  done < ~/.config/common.cfg
+
+}
+
+
+op=$1
+
+if [ $# -eq 0 ]; then
+
+  usage
+
+elif [ $op = "add_host" ]; then
+
+  add_host $2
+
+elif [ $op = "init" ]; then
+
+  init
+
+elif [ $op = "run" ]; then
+
+  run $2 $3 $4 $5 $6 $7 $8 $9 $10 $11
+
+else 
+
+  usage
+
+fi
+
