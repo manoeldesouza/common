@@ -6,7 +6,11 @@ Version: 1.0.1
 
 Release: 24-Jan-2020
 
-Author: Manoel de Souza <manoel.desouza@outlook.com.br>
+Author: Manoel de Souza manoel.desouza@outlook.com.br
+
+
+Simple unix shell script to enable a single command to be quickly executed at multiple unix hosts
+
 
 
 USAGE: 
