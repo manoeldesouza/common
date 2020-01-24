@@ -57,23 +57,18 @@ run() {
 op=$1
 
 if [ $# -eq 0 ]; then
-
   usage
 
 elif [ $op = "add_host" ]; then
-
   add_host $2
 
 elif [ $op = "init" ]; then
-
   init
 
 elif [ $op = "run" ]; then
-
   run $2
 
 else 
-
   usage
 
 fi
