@@ -24,8 +24,6 @@ usage() {
   echo "  common add_host <user>@<host>"
   echo "  common run \"<unix command>\""
   echo " "
-  echo "NOTE: add_host will require login twice "
-  echo " "
 
 } 
 
@@ -34,8 +32,8 @@ add_host() {
 
   host=$1
   
-  ssh $host mkdir -p '~/.ssh'
-  cat ~/.ssh/id_rsa.pub | ssh $host 'cat >> ~/.ssh/authorized_keys'
+  local public_key=$(cat ~/.ssh/id_rsa.pub)
+  ssh $host "mkdir -p ~/.ssh && echo \"$public_key\" >> ~/.ssh/authorized_keys"
   echo $host >> ~/.config/common.cfg
 
 }
