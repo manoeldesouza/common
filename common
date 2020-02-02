@@ -45,7 +45,7 @@ run() {
 
   for host in `cat ~/.config/common.cfg`
   do
-    echo "\e[1m\e[4m$host:\e[0m"
+    echo "\e[1m\e[4m# $host:\e[0m"
     ssh $host "$@"
     echo " "
 
