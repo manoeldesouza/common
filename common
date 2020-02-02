@@ -9,6 +9,12 @@ init() {
 
 }
 
+edit() {
+
+  vi ~/.config/common.cfg
+
+}
+
 
 usage() {
 
@@ -21,6 +27,7 @@ usage() {
   echo " "
   echo "USAGE: "
   echo "  common init"
+  echo "  common edit"
   echo "  common add_host <user>@<host>"
   echo "  common run \"<unix command>\""
   echo " "
@@ -32,8 +39,8 @@ add_host() {
 
   host=$1
   
-  local public_key=$(cat ~/.ssh/id_rsa.pub)
-  ssh $host "mkdir -p ~/.ssh && echo \"$public_key\" >> ~/.ssh/authorized_keys"
+  p_key=$(cat ~/.ssh/id_rsa.pub)
+  ssh $host "mkdir -p ~/.ssh && echo \"$p_key\" >> ~/.ssh/authorized_keys"
   echo $host >> ~/.config/common.cfg
 
 }
@@ -62,6 +69,9 @@ elif [ $op = "add_host" ]; then
 
 elif [ $op = "init" ]; then
   init
+
+elif [ $op = "edit" ]; then
+  edit
 
 elif [ $op = "run" ]; then
   run $2
